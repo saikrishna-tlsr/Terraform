@@ -2,7 +2,7 @@
 resource "aws_instance" "db" {
    ami  = "${var.ami}"
    instance_type = "t1.micro"
-   key_name = "${aws_key_pair.default.id}"
+   key_name = "sai"
    subnet_id = "${aws_subnet.private-subnet.id}"
    vpc_security_group_ids = ["${aws_security_group.sgdb.id}"]
    source_dest_check = false
