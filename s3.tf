@@ -6,13 +6,11 @@ resource "aws_s3_bucket" "b" {
     Name        = "terraform bucket-tlsr"
     Environment = "Dev"
   }
-
-server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        kms_master_key_id = "${aws_kms_key.state_s3_key.arn}"
-        sse_algorithm     = "aws:kms"
-      }
     }
-  }
-  }
+resource "aws_s3_bucket_object" "b_object" {
+  key                    = "someobject"
+  bucket                 = "${aws_s3_bucket.b.id}"
+  source                 = "index.html"
+  server_side_encryption = "AES256"
+}
+  
