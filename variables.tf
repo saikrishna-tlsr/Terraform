@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "Region for the VPC"
   default = "us-east-1"
-  availability zones = data "aws_availability_zones" "all" 
+  availability zones = data "aws_availability_zones" "all"{}
 }
 variable "count" {
  default = 1
