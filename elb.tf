@@ -18,7 +18,7 @@ resource "aws_elb" "example" {
   }
 }
 
-resource "aws_elb_attachment" "baz" {
+resource "aws_elb_attachment" "terraform-asg-example" {
   elb      = "${aws_elb.terraform-asg-example.id}"
   instance = "${aws_instance.wb.id}"
 }
