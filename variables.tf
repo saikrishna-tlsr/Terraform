@@ -3,7 +3,7 @@ variable "aws_region" {
   default = "us-east-1"
   }
 variable "count" {
- default = 1
+ default = 2
  }
 variable "availability_zones" {
         default = ["us-east-1a", "us-east-1b"]
