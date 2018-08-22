@@ -1,7 +1,7 @@
 # Define webserver inside the public subnet
 resource "aws_instance" "wb" {
    ami  = "${var.ami}"
-   count = “${var.count}”
+   count = "${var.count}"
    instance_type = "t1.micro"
    key_name = "sai"
    subnet_id = "${aws_subnet.public-subnet.id}"
@@ -11,6 +11,6 @@ resource "aws_instance" "wb" {
    user_data = "${file("install.sh")}"
 
   tags {
-    Name = "“${format(“wb-%03d”, count.index + 1)}”"
+    Name = "${format(“wb-%03d”, count.index + 1)}"
   }
 }
