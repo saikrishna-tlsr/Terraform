@@ -16,6 +16,7 @@ resource "aws_launch_configuration" "example" {
 ## Creating AutoScaling Group
 resource "aws_autoscaling_group" "example" {
   launch_configuration = "${aws_launch_configuration.example.id}"
+  availability_zones = ["us-east-1a", "us-east-1b"]
   min_size = 2
   max_size = 10
   load_balancers = ["${aws_elb.example.name}"]
