@@ -5,6 +5,9 @@ variable "aws_region" {
 variable "count" {
  default = 1
  }
+variable "availabilityZone" {
+        default = "us-east-1a"
+  }
 
 variable "vpc_cidr" {
   description = "CIDR for the VPC"
