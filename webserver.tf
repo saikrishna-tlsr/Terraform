@@ -11,6 +11,6 @@ resource "aws_instance" "wb" {
    user_data = "${file("install.sh")}"
 
   tags {
-    Name = "${format(“wb-%03d”, count.index + 1)}"
+    Name = "${format("wb-%03d", count.index + 1)}"
   }
 }
