@@ -17,3 +17,8 @@ resource "aws_elb" "example" {
     instance_protocol = "http"
   }
 }
+
+resource "aws_elb_attachment" "baz" {
+  elb      = "${aws_elb.terraform-asg-example.id}"
+  instance = "${aws_instance.wb.id}"
+}
