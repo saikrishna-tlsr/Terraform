@@ -1,8 +1,8 @@
 ## Creating Launch Configuration
 resource "aws_launch_configuration" "example" {
-  image_id               = "${lookup(var.amis,var.region)}"
+  image_id               = "${var.ami}"
   instance_type          = "t2.micro"
-  security_groups        = ["${aws_security_group.instance.id}"]
+  security_groups        = ["${aws_security_group.sgweb.id}"]
   key_name               = "sai"
   user_data = <<-EOF
               #!/bin/bash
