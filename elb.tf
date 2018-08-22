@@ -2,7 +2,7 @@
 resource "aws_elb" "example" {
   name = "terraform-asg-example"
   security_groups = ["${aws_security_group.elb.id}"]
-  availabilityZone = "us-east-1a"
+  availability_zones = "us-east-1a,us-east-1b"
   health_check {
     healthy_threshold = 2
     unhealthy_threshold = 2
