@@ -28,7 +28,7 @@ resource "aws_elb" "web" {
   name = "example-elb"
 
   # The same availability zone as our instance
-  subnets = ["${aws_subnet.tf_test_subnet.id}"]
+  subnets = ["${aws_subnet.public_subnet.id}"]
 
   security_groups = ["${aws_security_group.elb.id}"]
 
@@ -68,19 +68,18 @@ resource "aws_instance" "web" {
 
   # Lookup the correct AMI based on the region
   # we specified
-  ami = "${lookup(var.aws_amis, var.aws_region)}"
+  ami = ""${var.ami}""
 
   # The name of our SSH keypair you've created and downloaded
   # from the AWS console.
   #
   # https://console.aws.amazon.com/ec2/v2/home?region=us-west-2#KeyPairs:
   #
-  key_name = "${var.key_name}"
+  key_name = "sai"
 
   # Our Security group to allow HTTP and SSH access
-  vpc_security_group_ids = ["${aws_security_group.default.id}"]
-  subnet_id              = "${aws_subnet.tf_test_subnet.id}"
-  user_data              = "${file("userdata.sh")}"
+  vpc_security_group_ids = ["${aws_security_group.vpc_test_web.id}"]
+  subnet_id              = "${aws_subnet.public_subnet.id}"
 
   #Instance tags
 
