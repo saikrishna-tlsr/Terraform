@@ -18,7 +18,4 @@ resource "aws_elb" "example" {
   }
 }
 
-resource "aws_elb_attachment" "example" {
-  elb      = "${aws_elb.example.id}"
-  instance = "${aws_instance.wb.id}"
-}
+
