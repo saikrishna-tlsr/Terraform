@@ -12,13 +12,7 @@ resources:
   source:
     repository: ((docker-repo))/((docker-terraform))
     tag: ((docker-tag))
-    
-- name: vpc
-  type: git
-  source:
-    uri: https://github.com/saikrishna-tlsr/Terraform.git/vpc.tf
-    branch: master
-    
+      
 
 jobs:
 - name: vpc creation
