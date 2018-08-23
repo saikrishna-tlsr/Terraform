@@ -1,0 +1,40 @@
+resources:
+- name: code-repo
+  type: git
+  source:
+    uri: https://github.com/saikrishna-tlsr/Terraform.git
+    branch: master
+    
+- name: terraform
+  type: docker-image
+  check_every: 1m
+  source:
+    repository: ((docker-repo))/((docker-terraform))
+    tag: ((docker-tag))
+    
+    - name: dev-NETWORK__((aws_region))__
+  public: false
+  serial: true
+  plan:
+  - do:
+    - aggregate:
+      - get: code-repo
+        trigger: true
+        passed: [dev__((aws_region))__]
+      - get: terraform
+    - task: create-vpc
+      image: terraform
+      config:
+        platform: linux
+        inputs:
+           - name: code-repo
+        params:
+          ENV: dev
+          PROJECT: network
+          AWS_REGION:us-east-1
+          AWS_ACCESS_KEY_ID: ((access_key_id))
+          AWS_SECRET_ACCESS_KEY: ((secret_key))
+        run:
+          path: code-repo/vpc.tf
+    
+ 
