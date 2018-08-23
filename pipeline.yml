@@ -12,6 +12,7 @@ resources:
     repository: ((docker-repo))/((docker-terraform))
     tag: ((docker-tag))
     
+  jobs:
     - name: dev-NETWORK__((aws_region))__
   public: false
   serial: true
@@ -20,7 +21,7 @@ resources:
     - aggregate:
       - get: code-repo
         trigger: true
-        passed: [dev__((aws_region))__]
+        passed: us-east-1
       - get: terraform
     - task: create-vpc
       image: terraform
@@ -29,8 +30,6 @@ resources:
         inputs:
            - name: code-repo
         params:
-          ENV: dev
-          PROJECT: network
           AWS_REGION:us-east-1
           AWS_ACCESS_KEY_ID: ((access_key_id))
           AWS_SECRET_ACCESS_KEY: ((secret_key))
