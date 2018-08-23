@@ -29,10 +29,6 @@ resources:
         platform: linux
         inputs:
            - name: code-repo
-        params:
-          AWS_REGION:us-east-1
-          AWS_ACCESS_KEY_ID: ((access_key_id))
-          AWS_SECRET_ACCESS_KEY: ((secret_key))
         run:
           path: code-repo/vpc.tf
     
