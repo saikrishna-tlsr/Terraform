@@ -21,6 +21,7 @@ jobs:
     - get: concourse-aws
     - get: terraform
   - task: aws infrastructure
-    file: concourse-aws/pipeline.yml
+    run:
+       path: concourse-aws/build.sh
     
  
