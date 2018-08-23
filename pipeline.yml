@@ -1,5 +1,6 @@
+        
 resources:
-- name: code-repo
+- name: concourse-aws
   type: git
   source:
     uri: https://github.com/saikrishna-tlsr/Terraform.git
@@ -12,24 +13,20 @@ resources:
     repository: ((docker-repo))/((docker-terraform))
     tag: ((docker-tag))
     
-  jobs:
-    - name: dev-NETWORK__((aws_region))__
-  public: false
-  serial: true
+- name: vpc
+  type: git
+  source:
+    uri: https://github.com/saikrishna-tlsr/Terraform.git/vpc.tf
+    branch: master
+    
+
+jobs:
+- name: vpc creation
   plan:
-  - do:
-    - aggregate:
-      - get: code-repo
-        trigger: true
-        passed: us-east-1
-      - get: terraform
-    - task: create-vpc
-      image: terraform
-      config:
-        platform: linux
-        inputs:
-           - name: code-repo
-        run:
-          path: code-repo/vpc.tf
+  - aggregate:
+    - get: concourse-aws
+    - get: terraform
+  - task: aws infrastructure
+    file: concourse-aws/pipeline.yml
     
  
